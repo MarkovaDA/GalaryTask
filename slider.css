@@ -1,0 +1,91 @@
+
+html,body, #slider{
+    width:100%;
+    height: 100%;
+}
+#viewer{
+    width: 80%;
+    height:70%;
+    background: #2f353b;
+    /*margin: 100px auto;*/
+    position: absolute;
+    left: 10%;
+    top: 15%;
+}
+#viewer img{
+    /*margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    max-width: 100%;
+    display: inline-block;*/
+    /*width: 50%;
+    height: auto;
+    overflow: auto;
+    margin: auto;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;*/
+
+    width: 50%;
+    height: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+#collection{
+    display: flex;
+    width: 100%;
+    height: 12%;
+    position: absolute;
+    bottom: 10px;
+    background-color: #f5f5f5;
+    border: 2px solid orange;
+    /*left: 5%;*/
+}
+.item{
+    height: 90%;
+    width: 10%;
+    border: 1px solid dimgrey;
+    margin: 5px;
+    background-image: url('images/picture_icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90% auto;
+}
+.arrow{
+    background-color: rgba(255,153,0, 1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90% auto;
+}
+.arrow_left{
+    width: 50px;
+    height: 100%;
+    background-image: url('images/arrow_left.png');
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.small_arrow_left{
+    width:30px;
+    height:100%;
+    position: absolute;
+    background-image: url('images/arrow_left_circle.png');
+    top: 0px;
+    left: 0px;
+}
+.small_arrow_right{
+    width:30px;
+    height:100%;
+    position: absolute;
+    background-image: url('images/arrow_right_circle.png');
+    top: 0px;
+    right: 0px;
+}
+.arrow_right{
+    width: 50px;
+    height: 100%;
+    background-image: url('images/arrow_right.png');
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
