@@ -33,29 +33,36 @@ html,body, #slider{
 }
 #collection{
     display: flex;
-    width: 100%;
+    width: 90%;
     height: 12%;
     position: absolute;
+    left: 5%;
     bottom: 10px;
-    background-color: #f5f5f5;
-    border: 2px solid orange;
+    background-color: #2f353b;
     /*left: 5%;*/
 }
 .item{
     height: 90%;
-    width: 10%;
+    width: 120px;
+    min-width: 120px;
     border: 1px solid dimgrey;
     margin: 5px;
-    background-image: url('images/picture_icon.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 90% auto;
+    background-color: white;
+    background: url('https://t3.ftcdn.net/jpg/00/98/94/82/240_F_98948223_9qlkz5FypudEEBDE6yfje7R2tRA8AjlA.jpg') 100% 100% no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+.item:hover{
+    opacity: 0.5;
+    transition: all .2s ease-in-out;
 }
 .arrow{
     background-color: rgba(255,153,0, 1);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 90% auto;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    display:none;
 }
 .arrow_left{
     width: 50px;
@@ -66,20 +73,28 @@ html,body, #slider{
     left: 0px;
 }
 .small_arrow_left{
-    width:30px;
-    height:100%;
-    position: absolute;
     background-image: url('images/arrow_left_circle.png');
-    top: 0px;
     left: 0px;
 }
 .small_arrow_right{
+    background-image: url('images/arrow_right_circle.png');
+    right: 0px;
+}
+.small_arrow{
+    top: 0px;
     width:30px;
     height:100%;
     position: absolute;
-    background-image: url('images/arrow_right_circle.png');
-    top: 0px;
-    right: 0px;
+    z-index: 10000;
+    background-color: rgba(255,153,0,1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90% auto;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    display:none;
+}
+.small_arrow:hover{
+
 }
 .arrow_right{
     width: 50px;
