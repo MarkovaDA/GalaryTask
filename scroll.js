@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
     let delta = '120px';
     let w = 120;
     //инициализация начального положения
@@ -40,6 +41,7 @@ $(document).ready(function(){
         });
     });
     //отображение стрелок прокрутки ленты
+
     $('#collection').mouseover(function () {
         $('.small_arrow').fadeIn(100);
     });
@@ -56,7 +58,6 @@ $(document).ready(function(){
     //выбор элемента и отображение во вьюере
     $('.item').click(function(){
         $('#viewer img').attr('src', $(this).attr('url'));
-        console.log($('#viewer img').attr('src'));
     });
 
 
