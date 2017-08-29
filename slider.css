@@ -13,18 +13,6 @@ html,body, #slider{
     top: 15%;
 }
 #viewer img{
-    /*margin: auto;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    max-width: 100%;
-    display: inline-block;*/
-    /*width: 50%;
-    height: auto;
-    overflow: auto;
-    margin: auto;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;*/
-
     width: 50%;
     height: auto;
     margin: auto;
@@ -39,6 +27,7 @@ html,body, #slider{
     left: 5%;
     bottom: 10px;
     background-color: #2f353b;
+    overwlow: hidden;
     /*left: 5%;*/
 }
 .item{
@@ -93,8 +82,8 @@ html,body, #slider{
     box-shadow: 0 0 2px rgba(0,0,0,0.5);
     display:none;
 }
-.small_arrow:hover{
-
+.selection{
+    border-top:2px solid rgba(255,153,0,1);
 }
 .arrow_right{
     width: 50px;
