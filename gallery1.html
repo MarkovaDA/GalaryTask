@@ -9,6 +9,7 @@
     <script type="text/javascript" src="scripts/slider.js"></script>
     <script type="text/javascript" src="scripts/media_object.js"></script>
     <script type="text/javascript" src="scripts/image.js"></script>
+    <script type="text/javascript" src="scripts/video.js"></script>
     <script type="text/javascript" src="scripts/slider_control.js"></script>
 </head>
 <body>
@@ -17,8 +18,9 @@
         <div id="viewer">
             <div class="arrow arrow_left" id="viewer_left"></div>
             <div class="arrow arrow_right" id="viewer_right"></div>
-            <div class="explore_zone">
 
+            <div class="explore_zone">
+                <!--зона просмотра элемента-->
             </div>
         </div>
         <!--набор элементов для обзора-->
@@ -31,5 +33,9 @@
             <div class="small_arrow small_arrow_right" id="tape_right"></div>
         </div>
     </div>
+    <video  style="display: none;" id="video_content" controls="controls" poster="images/video_poster.jpg">
+        <source src="video/video1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <p>Тег video не поддерживается вашим браузером.</p>
+    </video>
 </body>
 </html>

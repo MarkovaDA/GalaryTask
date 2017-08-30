@@ -9,6 +9,10 @@ $(document).ready(function(){
     const slider = new Gallery(120);
     slider.addSlide(media1);
     slider.addSlide(media2);
+
+    const video1 = new Video('video/video1.mp4');
+    slider.addSlide(video1);
+
     slider.addSlide(media3);
     slider.addSlide(media4);
     slider.addSlide(media5);

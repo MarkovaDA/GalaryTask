@@ -8,9 +8,11 @@ class ItemGallery {
     /*единичный элемент в ленте*/
     slider(){
         this.root = $('<div class="item"></div>');
-        const url = this.media.getSrc();
+        const url = this.media.src();
         this.root.attr('url', url);
         this.root.css('background-image', 'url('.concat(url).concat(')'));
+        if (this.media instanceof Video)
+            this.root.css('background-size', '50% 50%');
         this.root.css('left', $('.item').length * this.w);
         return this.root;
     }
@@ -24,8 +26,12 @@ class ItemGallery {
     }
     /*выделить элемент рамкой*/
     pickout(){
-        console.log(this.root);
         this.root.addClass('selection');
+    }
+    close(){
+        //закрываем видео
+        if (this.media instanceof Video)
+            this.media.close()
     }
 }
 
@@ -100,13 +106,16 @@ class Gallery {
 
     /*обзор предыдущего слайда*/
 	viewerPrev(){
+	    this.currentSlide().close();
 		if (--this.currentIndex < 0) this.currentIndex = $('.item').length - 1;
         //отображение предыдущего элемента в контейнере обзора
         this.view();
+
       
     }
 	/*обзор следующего слайда*/
     viewerNext(){
+        this.currentSlide().close();
 		const itemLength = $('.item').length;
         //отображение следующего элемента в контейнере обзора
 		if (++this.currentIndex >= itemLength) this.currentIndex = 0;

@@ -3,9 +3,9 @@ class Image extends MediaObject {
         super(_url);
         this.root = null;
     }
-    /*представление элемента в обозревателе*/
+
     element(){
-        this.root = $('<img src=""/>');
+        this.root = $('<img />');
         this.root.attr('src', this.url);
         return this.root;
     }

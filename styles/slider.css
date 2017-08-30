@@ -12,7 +12,7 @@ html,body, #slider{
     left: 10%;
     top: 15%;
 }
-#viewer img{
+#viewer img, #viewer video{
     width: 50%;
     height: auto;
     margin: auto;
@@ -26,19 +26,16 @@ html,body, #slider{
     height: 12%;
     position: absolute;
     bottom: 10px;
-    /*background-color: #2f353b;*/
     overflow: hidden;
     /*left: 5%;*/
 }
 .item{
-    height: 100%;
+    height: 95%;
     width: 120px;
     min-width: 120px;
-    border: 1px solid dimgrey;
-    /*margin: 5px;*/
-    background-color: white;
-    background: url('https://t3.ftcdn.net/jpg/00/98/94/82/240_F_98948223_9qlkz5FypudEEBDE6yfje7R2tRA8AjlA.jpg') 50% 50% no-repeat;
-    background-size: cover;
+    border: 1px solid moccasin;
+    background:  #2f353b url('https://t3.ftcdn.net/jpg/00/98/94/82/240_F_98948223_9qlkz5FypudEEBDE6yfje7R2tRA8AjlA.jpg') 50% 50% no-repeat;
+    background-size: 90% auto;
     position: absolute;
 }
 .item:hover{
@@ -83,7 +80,7 @@ html,body, #slider{
     display:none;
 }
 .selection{
-    border-top:2px solid rgba(255,153,0,1);
+    border-top:3px solid rgba(255,153,0,1);
 }
 .arrow_right{
     width: 50px;
