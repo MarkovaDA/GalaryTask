@@ -1,38 +1,68 @@
-/*класс Slider, реализующий функционал галереи*/
-class Slider {
+/*отдельный элемент галереи*/
+class ItemGallery {
+    constructor(media){
+        this.media = media;
+        this.w = 120;/*ширина одного элемента в ленте*/
+        this.root = null;
+    }
+    /*единичный элемент в ленте*/
+    slider(){
+        this.root = $('<div class="item"></div>');
+        const url = this.media.getSrc();
+        this.root.attr('url', url);
+        this.root.css('background-image', 'url('.concat(url).concat(')'));
+        this.root.css('left', $('.item').length * this.w);
+        return this.root;
+    }
+    /*анимация при отображении*/
+    animate(){
+        this.media.animate();
+    }
+    /*представление элемента*/
+    preview(){
+        return this.media.element();
+    }
+    /*выделить элемент рамкой*/
+    pickout(){
+        console.log(this.root);
+        this.root.addClass('selection');
+    }
+}
+
+/*галерея как набор элементов*/
+class Gallery {
+
     constructor(width) {
         this.w = width;
         this.currentIndex = -1;
+        this.sliders = new Array();//набор слайдеров
+
         $('#tape_right').bind('click', this.next.bind(this));
         $('#tape_left').bind('click', this.prev.bind(this));
         $('#viewer_left').bind('click', this.viewerPrev.bind(this));
         $('#viewer_right').bind('click', this.viewerNext.bind(this));
         this.mouseBehaviour();
     }
+
     /*добавить слайд в галерею*/
-    addSlide(url){
-        let slideContainer = $('<div class="item"></div>');
-		let classContext = this;
-        slideContainer.attr('url', url);
-        slideContainer.css('background-image', 'url('.concat(url).concat(')'));
-        slideContainer.css('left', $('.item').length * this.w);
-        $('#collection').append(slideContainer);
-        //привязываем событие отображения при клике на иконку в ленте
-        var selectFunc = this.select;
-		
-        slideContainer.bind('click', function () {
-			console.log(classContext, classContext.currentIndex);			
-			classContext.currentIndex = $('.item').index(slideContainer); 
-			console.log('currentIndex from addSlide', classContext.currentIndex);
-            selectFunc($(this));
+    addSlide(media){
+        const itemGalery = new ItemGallery(media);
+        this.sliders.push(itemGalery);
+        const slider =  itemGalery.slider();
+        $('#collection').append(slider);
+
+        const context = this;
+        slider.bind('click', function () {
+            context.currentIndex = $('.item').index(slider);
+            context.view();
         });
     }
-
     /*прокрутка ленты вперед*/
     next(){
-        let _w = this.w;
-		let itemLength = $('.item').length;
-        let arr = new Array(itemLength);//заменить на кол-во блоков
+        const _w = this.w;
+		const itemLength = $('.item').length;//заменить длиной массива
+        const arr = new Array(itemLength);//заменить на кол-во блоков
+        //заменить циклом по элементам
         $('.item').each(function (index) {
             let rightBorder = parseFloat($(this).css('right'));
             if (rightBorder < 0)
@@ -63,30 +93,34 @@ class Slider {
         });
         if (--this.currentIndex < 0) this.currentIndex = $('.item').length - 1;		
     }
+
+    currentSlide(){
+        return this.sliders[this.currentIndex];
+    }
+
     /*обзор предыдущего слайда*/
 	viewerPrev(){
 		if (--this.currentIndex < 0) this.currentIndex = $('.item').length - 1;
         //отображение предыдущего элемента в контейнере обзора
-        this.select($('.item').eq(this.currentIndex));
+        this.view();
       
     }
 	/*обзор следующего слайда*/
     viewerNext(){
-		let itemLength = $('.item').length;
+		const itemLength = $('.item').length;
         //отображение следующего элемента в контейнере обзора
 		if (++this.currentIndex >= itemLength) this.currentIndex = 0;
-        this.select($('.item').eq(this.currentIndex));   
+        this.view();
     }
-	
-    /*выбор элемента из ленты для обзора*/
-    select(sliderItem){		 
-		 $('#viewer img').attr('src', sliderItem.attr('url'));
-		 //небольшой эффект увеличения слайда
-		 $('#viewer img').css('width', '30%');
-		 $('#viewer img').animate({'width':'50%'},300);
-		  //выделяем отображаемый в данный момент элемент рамкой
-	     $('.item').removeClass('selection');
-         sliderItem.addClass('selection');
+    /*обзор  выбранного элемента*/
+    view(){
+        $('#viewer .explore_zone').empty().append(this.currentSlide().preview());
+        this.currentSlide().animate();
+        this.unselectAll();
+        this.currentSlide().pickout();
+    }
+    unselectAll(){
+        $('.item').removeClass('selection');
     }
 	/*поведение отдельных элементов слайдера при наведении мыши*/
     mouseBehaviour(){
