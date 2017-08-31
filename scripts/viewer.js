@@ -1,7 +1,7 @@
 class Viewer{
-    constructor(callback){
+    constructor(){
         this.lastSketch = null;
-        this.callback = callback;
+		
         this.mouseBehaviour();
         $('#viewer_right').bind('click', this.next.bind(this));
         $('#viewer_left').bind('click', this.prev.bind(this));
@@ -17,12 +17,12 @@ class Viewer{
     //запрашиваем следующий элемент для отображения
     next(){
         let nextIndex = this.lastSketch.getNumber();
-        this.callback(++nextIndex);
+		emitter.emit("view_another", ++nextIndex);
     }
     //запрашиваем предыдущий элемент для отображения
     prev(){
         let prevIndex = this.lastSketch.getNumber();
-        this.callback(--prevIndex);
+		emitter.emit("view_another", --prevIndex);
     }
     mouseBehaviour() {
         //отображение стрелок прокрутки в элементе обзора

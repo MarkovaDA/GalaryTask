@@ -13,18 +13,8 @@ class ThumbnailList {
 		emitter.subscribe('click_thumbnail', number => {
 			this.current = parseInt(number);
 			emitter.emit('choose_thumbnail', this.sketches[this.current]);
-			//связываемся с классом слайдер
 		});
-        //обратная связь с обозревателем
-        /*this.viewerNextPrevCallback = function(number){
-            if (number < 0)
-                number = context.count() - 1;
-            if (number >= context.count())
-                number = 0;
-            context.viewer.view(context.sketches[number]);
-        };*/
-        //this.viewer = new Viewer(this.viewerNextPrevCallback);
-
+		
         $('#tape_right').bind('click', this.next.bind(this));
         $('#tape_left').bind('click', this.prev.bind(this));
         this.mouseBehaviour();
