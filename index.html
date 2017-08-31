@@ -10,13 +10,13 @@
     <script type="text/javascript" src="scripts/image.js"></script>
     <script type="text/javascript" src="scripts/video.js"></script>
 
+    <script type="text/javascript" src="scripts/thumbnail_list.js"></script>
+    <script type="text/javascript" src="scripts/viewer.js"></script>
     <script type="text/javascript" src="scripts/thumbnail.js"></script>
-    <script type="text/javascript" src="scripts/view.js"></script>
-    <script type="text/javascript" src="scripts/sketch.js"></script>
 
     <script>
         $(document).ready(function(){
-            const thumbnail = new Thumbnail();
+            const thumbnail = new ThumbnailList();
             thumbnail.addSketch('https://i.driver.life/images/redactor_960x1000/940131142574e2d9746e9d.jpg');
             thumbnail.addSketch('https://motor.kz/uploads/f412f2643522247800fc7796798e770363d9/b5af448794e14b62d70274adfd87b27c1d32.jpg');
             thumbnail.addSketch('http://wallpage.ru/imgbig/wallpapers_29640.jpg');
