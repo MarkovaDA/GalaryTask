@@ -4,13 +4,11 @@
 */
 class Thumbnail{
 
-    constructor(media, callback, number){
+    constructor(media, number){
         this.media = media;
         this.w = 120;
         this.number = number;
         this.root = null;
-        this.slideClickCallback = callback;
-        console.log('creating sketch');
     }
     initDOM(){
         const elem = `
@@ -25,19 +23,17 @@ class Thumbnail{
         //обработка клика на элементе
         const context = this;
         this.root.bind('click', function(){
-            //выделяем элемент
-            //context.addSelection();
-            //оповещаем Thumbnail об элементе, который был выбран
-            context.slideClickCallback(context);
+			//передаем thumbnaillist номер дочернего элемента thumbnail
+            emitter.emit('click_thumbnail', context.number);
         });
         return this.root;
     }
 
-    /*представление элемента*/
+    /*представление элемента для отображения во Viwer*/
     getPreview(){
        return this.media.element();
     }
-    /*получить номер текущего слайда*/
+    /*получить номер текущего thumbnail*/
     getNumber(){
         return this.number;
     }

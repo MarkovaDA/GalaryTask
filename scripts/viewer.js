@@ -1,4 +1,4 @@
-class View{
+class Viewer{
     constructor(callback){
         this.lastSketch = null;
         this.callback = callback;

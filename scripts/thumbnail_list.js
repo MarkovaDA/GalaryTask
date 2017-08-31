@@ -1,3 +1,4 @@
+
 /*
 * Лента прокрутки элементов
 */
@@ -7,23 +8,22 @@ class ThumbnailList {
         this.sketches = [];
         this.current = 0;
         this.w = 120;
-
-        const context = this;
-
-        //обратная связь со слайдом
-        this.slideClickCallback = function (sketch) {
-            context.viewer.view(sketch);
-        };
+		
+		//подписка на событие выбора thumbnail
+		emitter.subscribe('click_thumbnail', number => {
+			this.current = parseInt(number);
+			emitter.emit('choose_thumbnail', this.sketches[this.current]);
+			//связываемся с классом слайдер
+		});
         //обратная связь с обозревателем
-        this.viewerNextPrevCallback = function(number){
+        /*this.viewerNextPrevCallback = function(number){
             if (number < 0)
                 number = context.count() - 1;
             if (number >= context.count())
                 number = 0;
             context.viewer.view(context.sketches[number]);
-        };
-        //инициализируем окно просмотра элемента
-        this.viewer = new View(this.viewerNextPrevCallback);
+        };*/
+        //this.viewer = new Viewer(this.viewerNextPrevCallback);
 
         $('#tape_right').bind('click', this.next.bind(this));
         $('#tape_left').bind('click', this.prev.bind(this));
@@ -32,7 +32,7 @@ class ThumbnailList {
 
     /*добавить элемент в ленту прокрутки*/
     addSketch(url){
-        let sketch = new Thumbnail(new Image(url), this.slideClickCallback, this.sketches.length);
+        let sketch = new Thumbnail(new Image(url),this.sketches.length);
         this.sketches.push(sketch);
         //добавили в дом
         $('#collection').append(sketch.initDOM());
@@ -58,7 +58,7 @@ class ThumbnailList {
         //обновление номера текущего слайда
         if (++this.current >= length)
             this.current = 0;
-        this.viewer.view(this.sketches[this.current]);
+		emitter.emit('choose_thumbnail', this.sketches[this.current]);
     }
     /*прокрутка влево*/
     prev(){
@@ -83,7 +83,7 @@ class ThumbnailList {
         //обновление номера текущего слайда
         if (--this.current < 0)
             this.current = this.count() - 1;
-        this.viewer.view(this.sketches[this.current]);
+		emitter.emit('choose_thumbnail', this.sketches[this.current]);
     }
     /*кол-во слайдов в галерее*/
     count(){
