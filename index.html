@@ -2,14 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gallery</title>
+    <title>Gallery task</title>
     <link href="styles/slider.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="scripts/slider.js"></script>
+
     <script type="text/javascript" src="scripts/media_object.js"></script>
     <script type="text/javascript" src="scripts/image.js"></script>
     <script type="text/javascript" src="scripts/video.js"></script>
-    <script type="text/javascript" src="scripts/slider_control.js"></script>
+
+    <script type="text/javascript" src="scripts/thumbnail.js"></script>
+    <script type="text/javascript" src="scripts/view.js"></script>
+    <script type="text/javascript" src="scripts/sketch.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            const thumbnail = new Thumbnail();
+            thumbnail.addSketch('https://i.driver.life/images/redactor_960x1000/940131142574e2d9746e9d.jpg');
+            thumbnail.addSketch('https://motor.kz/uploads/f412f2643522247800fc7796798e770363d9/b5af448794e14b62d70274adfd87b27c1d32.jpg');
+            thumbnail.addSketch('http://wallpage.ru/imgbig/wallpapers_29640.jpg');
+            thumbnail.addSketch('http://svadba-nakipre.ru/assets/gallery/25/822.jpg');
+            thumbnail.addSketch('https://s.rdrom.ru/1/pubs/4/18871/430583.jpg');
+        });
+    </script>
 </head>
 <body>
     <div id="slider">
@@ -33,9 +47,5 @@
             <div class="small_arrow small_arrow_right" id="tape_right"></div>
         </div>
     </div>
-    <video  style="display: none;" id="video_content" controls="controls" poster="images/video_poster.jpg" autoplay>
-        <source src="video/video1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-        <p>Тег video не поддерживается вашим браузером.</p>
-    </video>
 </body>
 </html>

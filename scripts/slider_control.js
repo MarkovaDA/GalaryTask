@@ -6,10 +6,13 @@ $(document).ready(function(){
     const media3 = new Image('http://wallpage.ru/imgbig/wallpapers_29640.jpg');
     const media4 = new Image('http://svadba-nakipre.ru/assets/gallery/25/822.jpg');
     const media5 = new Image('https://s.rdrom.ru/1/pubs/4/18871/430583.jpg');
-    const slider = new Gallery(120);
+
 
     const video1 = new Video('video/video1.mp4');
     const video2 = new Video('video/video2.mp4');
+
+    const slider = new Gallery(120);
+
     slider.add(media1)
           .add(media2)
           .add(video1)

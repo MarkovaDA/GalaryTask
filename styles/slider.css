@@ -19,6 +19,11 @@ html,body, #slider{
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
 }
+.explore_zone{
+    text-align: center;
+    vertical-align: middle;
+    color:orange;
+}
 
 #collection{
     display: flex;
@@ -34,9 +39,15 @@ html,body, #slider{
     width: 120px;
     min-width: 120px;
     border: 1px solid moccasin;
-    background:  #2f353b url('https://t3.ftcdn.net/jpg/00/98/94/82/240_F_98948223_9qlkz5FypudEEBDE6yfje7R2tRA8AjlA.jpg') 50% 50% no-repeat;
-    background-size: 90% auto;
+    background-color:  #2f353b;
     position: absolute;
+}
+.item img{
+    width: 90%;
+    height: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
 }
 .item:hover{
     opacity: 0.5;

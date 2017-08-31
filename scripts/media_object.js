@@ -1,5 +1,4 @@
 class MediaObject {
-
     constructor(_url){
         this.url = _url;
     }

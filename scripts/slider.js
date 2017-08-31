@@ -11,8 +11,10 @@ class ItemGallery {
         const url = this.media.src();
         this.root.attr('url', url);
         this.root.css('background-image', 'url('.concat(url).concat(')'));
+
         if (this.media instanceof Video) //корректируем размер иконки для видео-контента
             this.root.css('background-size', '50% auto');
+
         this.root.css('left', $('.item').length * this.w);
         return this.root;
     }
@@ -35,14 +37,11 @@ class ItemGallery {
     }
     /*отступ элемента слева*/
     leftProp(value){
-        if (typeof value !== 'undefined')
+        if (typeof value !== 'undefined') {
             this.root.css('left', value);
-        else
+        } else {
             return parseFloat(this.root.css('left'));
-    }
-    setLeft(value){
-        if (typeof value !== 'undefined')
-        this.root.css('left', value);
+        }
     }
     /*отступ элемента справа*/
     rightProp(){
@@ -52,16 +51,14 @@ class ItemGallery {
 
 /*галерея как набор элементов*/
 class Gallery {
-
     constructor(width) {
         this.w = width;
         this.currentIndex = -1;
-        this.slides = new Array();//набор слайдов
+        this.slides = [];//набор слайдов
 
-        $('#tape_right').bind('click', this.next.bind(this));
-        $('#tape_left').bind('click', this.prev.bind(this));
-        $('#viewer_left').bind('click', this.prev.bind(this));
-        $('#viewer_right').bind('click', this.next.bind(this));
+        $('#tape_right, #viewer_right').bind('click', this.next.bind(this));
+        $('#tape_left, #viewer_left').bind('click', this.prev.bind(this));
+
         this.mouseBehaviour();
     }
 
@@ -72,6 +69,7 @@ class Gallery {
         const slider =  itemGalery.slider();
         $('#collection').append(slider);
 
+        //привязка реакции на клик
         const context = this;
         slider.bind('click', function () {
             context.currentIndex = $('.item').index(slider);
@@ -107,6 +105,7 @@ class Gallery {
         //отображаем выбранный элемент в просмотрщике
         this.view();
     }
+
     /*прокрутка ленты назад*/
     prev(){
         if (this.currentIndex === -1) //прокрутка не выполняется если не выбран элемент
@@ -133,6 +132,7 @@ class Gallery {
         //отображаем выбранный элемент в просмотрщике
         this.view();
     }
+
     /*текущий слайд*/
     currentSlide(){
         return this.slides[this.currentIndex];
@@ -148,6 +148,7 @@ class Gallery {
         this.unselectAll();
         this.currentSlide().pickout();
     }
+
     unselectAll(){
         $('.item').removeClass('selection');
     }
