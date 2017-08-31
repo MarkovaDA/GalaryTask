@@ -8,11 +8,9 @@ class Video extends MediaObject {
         return "images/video_icon.png";
     }
     element(){
-        //брать скрытый видео-элемент
         this.root = $('video').clone();
         this.root.find('source').attr('src', this.url);
         this.root.css('display', 'block');
-
         return this.root;
     }
     animate(){

@@ -3,6 +3,7 @@ class MediaObject {
     constructor(_url){
         this.url = _url;
     }
+    /*url элемента*/
     src(){
         return this.url;
     }
