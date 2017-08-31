@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d7d715b-bd8d-4dc8-9879-f462e9891c52" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/scroll.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/video_test.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/video_icon.png" afterPath="$PROJECT_DIR$/images/video_icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gallery1.html" afterPath="$PROJECT_DIR$/gallery1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/media_object.js" afterPath="$PROJECT_DIR$/scripts/media_object.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/slider.js" afterPath="$PROJECT_DIR$/scripts/slider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/slider_control.js" afterPath="$PROJECT_DIR$/scripts/slider_control.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/video.js" afterPath="$PROJECT_DIR$/scripts/video.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -64,27 +56,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="slider.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="slider.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/slider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="77" column="27" lean-forward="true" selection-start-line="77" selection-start-column="27" selection-end-line="77" selection-end-column="27" />
+            <state relative-caret-position="230">
+              <caret line="99" column="41" lean-forward="true" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="n#!!block;n#next#0;n#Gallery#0" expanded="false" />
+                <element signature="n#!!block;n#add#0;n#Gallery#0" expanded="false" />
                 <element signature="n#!!block;n#prev#0;n#Gallery#0" expanded="false" />
-                <marker date="1504166653308" expanded="false" signature="4765:4817" ph="{...}" />
-                <marker date="1504166653308" expanded="false" signature="4901:5391" ph="{...}" />
-                <marker date="1504166653308" expanded="false" signature="4975:5029" ph="{...}" />
-                <marker date="1504166653308" expanded="false" signature="5080:5135" ph="{...}" />
-                <marker date="1504166653308" expanded="false" signature="5239:5287" ph="{...}" />
-                <marker date="1504166653308" expanded="false" signature="5334:5383" ph="{...}" />
+                <marker date="1504166996158" expanded="false" signature="4763:4815" ph="{...}" />
+                <marker date="1504166996158" expanded="false" signature="4899:5389" ph="{...}" />
+                <marker date="1504166996158" expanded="false" signature="4973:5027" ph="{...}" />
+                <marker date="1504166996158" expanded="false" signature="5078:5133" ph="{...}" />
+                <marker date="1504166996158" expanded="false" signature="5237:5285" ph="{...}" />
+                <marker date="1504166996158" expanded="false" signature="5332:5381" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="slider_control.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="slider_control.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/slider_control.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -145,8 +137,8 @@
         <option value="$PROJECT_DIR$/scripts/video.js" />
         <option value="$PROJECT_DIR$/gallery1.html" />
         <option value="$PROJECT_DIR$/scripts/media_object.js" />
-        <option value="$PROJECT_DIR$/scripts/slider.js" />
         <option value="$PROJECT_DIR$/scripts/slider_control.js" />
+        <option value="$PROJECT_DIR$/scripts/slider.js" />
       </list>
     </option>
   </component>
@@ -264,12 +256,12 @@
       <workItem from="1503916894796" duration="15190000" />
       <workItem from="1503986264357" duration="30926000" />
       <workItem from="1504073876514" duration="25319000" />
-      <workItem from="1504161056762" duration="5710000" />
+      <workItem from="1504161056762" duration="5972000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77145000" />
+    <option name="totallyTimeSpent" value="77407000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -355,14 +347,14 @@
           <caret line="123" column="30" lean-forward="false" selection-start-line="123" selection-start-column="30" selection-end-line="123" selection-end-column="30" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#next#0;n#Gallery#0" expanded="false" />
+            <element signature="n#!!block;n#add#0;n#Gallery#0" expanded="false" />
             <element signature="n#!!block;n#prev#0;n#Gallery#0" expanded="false" />
-            <marker date="1504166653308" expanded="false" signature="4765:4817" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="4901:5391" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="4975:5029" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5080:5135" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5239:5287" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5334:5383" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4763:4815" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4899:5389" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4973:5027" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5078:5133" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5237:5285" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5332:5381" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -418,14 +410,14 @@
           <caret line="43" column="24" lean-forward="true" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#next#0;n#Gallery#0" expanded="false" />
+            <element signature="n#!!block;n#add#0;n#Gallery#0" expanded="false" />
             <element signature="n#!!block;n#prev#0;n#Gallery#0" expanded="false" />
-            <marker date="1504166653308" expanded="false" signature="4765:4817" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="4901:5391" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="4975:5029" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5080:5135" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5239:5287" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5334:5383" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4763:4815" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4899:5389" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4973:5027" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5078:5133" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5237:5285" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5332:5381" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -503,16 +495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gallery1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="54" lean-forward="false" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
-          <folding>
-            <element signature="n#style#0;n#video#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/video.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -528,29 +510,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/slider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="77" column="27" lean-forward="true" selection-start-line="77" selection-start-column="27" selection-end-line="77" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#next#0;n#Gallery#0" expanded="false" />
-            <element signature="n#!!block;n#prev#0;n#Gallery#0" expanded="false" />
-            <marker date="1504166653308" expanded="false" signature="4765:4817" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="4901:5391" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="4975:5029" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5080:5135" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5239:5287" ph="{...}" />
-            <marker date="1504166653308" expanded="false" signature="5334:5383" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/slider_control.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gallery1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="54" lean-forward="false" selection-start-line="31" selection-start-column="54" selection-end-line="31" selection-end-column="54" />
+          <folding>
+            <element signature="n#style#0;n#video#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/slider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="99" column="41" lean-forward="true" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#add#0;n#Gallery#0" expanded="false" />
+            <element signature="n#!!block;n#prev#0;n#Gallery#0" expanded="false" />
+            <marker date="1504166996158" expanded="false" signature="4763:4815" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4899:5389" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="4973:5027" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5078:5133" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5237:5285" ph="{...}" />
+            <marker date="1504166996158" expanded="false" signature="5332:5381" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

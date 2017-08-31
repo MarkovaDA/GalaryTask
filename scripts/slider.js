@@ -56,7 +56,7 @@ class Gallery {
     constructor(width) {
         this.w = width;
         this.currentIndex = -1;
-        this.slides = new Array();//набор слайдеров
+        this.slides = new Array();//набор слайдов
 
         $('#tape_right').bind('click', this.next.bind(this));
         $('#tape_left').bind('click', this.prev.bind(this));
