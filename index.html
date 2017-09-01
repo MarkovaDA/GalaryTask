@@ -5,6 +5,7 @@
     <title>Gallery task</title>
     <link href="styles/slider.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/dom.js"></script>
 	<script type="text/javascript" src="scripts/event_emitter.js"></script>
     <script type="text/javascript" src="scripts/media_object.js"></script>
     <script type="text/javascript" src="scripts/image.js"></script>
@@ -15,10 +16,11 @@
     <script type="text/javascript" src="scripts/thumbnail.js"></script>
 
     <script>
-		const slider = new Slider();
         $(document).ready(function(){
-			const slider = new Slider();
+            const slider = new Slider();
+            slider.init();
         });
+
     </script>
 </head>
 <body>

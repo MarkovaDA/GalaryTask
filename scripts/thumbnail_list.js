@@ -5,35 +5,39 @@
 class ThumbnailList {
 
     constructor(){
-        this.sketches = [];
+        this.slides = [];
         this.current = 0;
         this.w = 120;
 		
-		//подписка на событие выбора thumbnail
+		//выбор thumbnail в thumbnailList
 		emitter.subscribe('click_thumbnail', number => {
+		    //закольцовываем прокрутку
+            const count = this.count();
+            if (number < 0)
+                number = count - 1;
+            if (number >= count)
+                number = 0;
 			this.current = parseInt(number);
-			emitter.emit('choose_thumbnail', this.sketches[this.current]);
+			emitter.emit('choose_thumbnail', this.slides[this.current]);
 		});
 		
         $('#tape_right').bind('click', this.next.bind(this));
         $('#tape_left').bind('click', this.prev.bind(this));
-        this.mouseBehaviour();
+    }
+    add(media){
+        let thumbnail = new Thumbnail(media,this.count());
+        this.slides.push(thumbnail);
+        $('#collection')
+            .append(thumbnail.initDOM());
+        thumbnail.leftOffset(this.count() * this.w);
     }
 
-    /*добавить элемент в ленту прокрутки*/
-    addSketch(url){
-        let sketch = new Thumbnail(new Image(url),this.sketches.length);
-        this.sketches.push(sketch);
-        //добавили в дом
-        $('#collection').append(sketch.initDOM());
-    }
     /*прокрутка вправо*/
     next(){
-        this.sketches[this.current].close();//закрываем текущий открытый элемент
         const _w = this.w;
         const length = this.count();
         //расчет смещений для прокрутки
-        this.sketches.forEach(function (elem) {
+        this.slides.forEach(function (elem) {
             let value;
             const rightBorder = elem.rightOffset();
             if (rightBorder < 0)
@@ -48,17 +52,16 @@ class ThumbnailList {
         //обновление номера текущего слайда
         if (++this.current >= length)
             this.current = 0;
-		emitter.emit('choose_thumbnail', this.sketches[this.current]);
+		emitter.emit('choose_thumbnail', this.slides[this.current]);
     }
+
     /*прокрутка влево*/
     prev(){
-        this.sketches[this.current].close();
         const _w = this.w;
-        const length = this.count();
         let totalWidth = parseFloat($('#collection').width()); /*ширина всей конвейерной ленты*/
 
         //расчет смещений  для элементов ленты
-        this.sketches.forEach(function (elem) {
+        this.slides.forEach(function (elem) {
            let value;
             const leftBorder = elem.leftOffset();
             if (leftBorder === 0 || leftBorder < 0) {
@@ -73,21 +76,11 @@ class ThumbnailList {
         //обновление номера текущего слайда
         if (--this.current < 0)
             this.current = this.count() - 1;
-		emitter.emit('choose_thumbnail', this.sketches[this.current]);
+		emitter.emit('choose_thumbnail', this.slides[this.current]);
     }
+
     /*кол-во слайдов в галерее*/
     count(){
-        return this.sketches.length;
+        return this.slides.length;
     }
-
-    mouseBehaviour(){
-        //поведение мыши
-        $('#collection').mouseover(function () {
-            $('.small_arrow').fadeIn(100);
-        });
-        $('#collection').mouseleave(function () {
-            $('.small_arrow').fadeOut(100);
-        });
-    }
-
 }

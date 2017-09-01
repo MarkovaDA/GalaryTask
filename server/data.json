@@ -1,0 +1,11 @@
+{
+  "objects":[
+    {"url": "https://i.driver.life/images/redactor_960x1000/940131142574e2d9746e9d.jpg", "type": "image"},
+    {"url": "https://motor.kz/uploads/f412f2643522247800fc7796798e770363d9/b5af448794e14b62d70274adfd87b27c1d32.jpg", "type": "image"},
+    {"url": "http://wallpage.ru/imgbig/wallpapers_29640.jpg", "type": "image"},
+    {"url": "video/video1.mp4", "type": "video"},
+    {"url": "http://svadba-nakipre.ru/assets/gallery/25/822.jpg", "type": "image"},
+    {"url": "https://s.rdrom.ru/1/pubs/4/18871/430583.jpg", "type": "image"},
+    {"url": "video/video2.mp4", "type": "video"}
+  ]
+}

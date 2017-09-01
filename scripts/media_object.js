@@ -6,8 +6,8 @@ class MediaObject {
     src(){
         return this.url;
     }
-    /*отобразить элемент*/
-    element(){
+    /*представление элемента во viewer*/
+    preview(){
 
     }
     /*анимация элемента при появлении*/

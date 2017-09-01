@@ -7,7 +7,6 @@ html,body, #slider{
     width: 80%;
     height:70%;
     background: #2f353b;
-    /*margin: 100px auto;*/
     position: absolute;
     left: 10%;
     top: 15%;
@@ -44,10 +43,13 @@ html,body, #slider{
 }
 .item img{
     width: 90%;
-    height: 100%;
+    height: auto;
     margin: auto;
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
+}
+.item[type="video"] img{
+    width: 50%;
 }
 .item:hover{
     opacity: 0.5;

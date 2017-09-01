@@ -7,20 +7,20 @@ class Video extends MediaObject {
         //иконка в ленте прокрутки для всех видео-элементов одна и та же
         return "images/video_icon.png";
     }
-    element(){
-        this.root = $('video').clone();
-        this.root.find('source').attr('src', this.url);
-        this.root.css('display', 'block');
+    preview(){
+        const elem = `
+        <video id="video_content" controls="controls" autoplay poster="images/video_poster.jpg">
+            <source src=${this.url} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>
+        `;
+        this.root = $(elem);
         return this.root;
     }
     animate(){
-        this.root.css('width', '30%').css('opacity','0');
-        this.root.animate({'width':'50%', 'opacity': '1'},300);
+        this.root.animate({'width':'50%'},300);
     }
     close(){
-        var video = document.getElementById("video_content");
-        video.pause();
-        console.log("видео остановлено");
+        this.root.get(0).pause();
+        console.log("video stopping");
     }
-
 }
