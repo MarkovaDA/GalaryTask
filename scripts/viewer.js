@@ -1,31 +1,44 @@
-class Viewer{
-    constructor(){
-        this.thumbnail = null;
+class Viewer extends EventEmitter{
 
+    constructor(){
+        super();
+        this.lastNumber = null;
+        this.lastItem = null;
         $('#viewer_right').bind('click', this.next.bind(this));
         $('#viewer_left').bind('click', this.prev.bind(this));
     }
-    view(slide){
-        //закрыть предыдущий отображаемый элемент
-        if (this.thumbnail != null){
-            this.thumbnail.close();
+    cacheNodes() {
+        this.nodes = {
+            buttonLeft: '',
+            buttonRight: '',
+            exploreZone: '',
+        };
+    }
+    view(type, url, number){
+        if (this.lastItem != null){
+            this.lastItem.close();
         }
-        this.thumbnail = slide;
+        let media;
+        if (type === 'image')
+            media = new Image(url);
+        if (type === 'video')
+            media = new Video(url);
+
+        this.lastNumber = number;
+        this.lastItem = media;
 
         $('#viewer .explore_zone')
             .empty()
-            .append(slide.getPreview());
+            .append(media.preview());
 
-        slide.animate();
+        media.animate();
     }
     //запрашиваем следующий элемент для отображения
     next(){
-        let nextIndex = this.thumbnail.getNumber();
-		emitter.emit("view_another", ++nextIndex);
+		this.emit('VIEW_ANOTHER', this.lastNumber + 1);
     }
     //запрашиваем предыдущий элемент для отображения
     prev(){
-        let prevIndex = this.thumbnail.getNumber();
-		emitter.emit("view_another", --prevIndex);
+		this.emit('VIEW_ANOTHER', this.lastNumber - 1);
     }
 }

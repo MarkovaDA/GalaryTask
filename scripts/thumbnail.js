@@ -2,49 +2,37 @@
 * Единичный элемент ленты
 * инкапсулирует методы работы с медиа-объектом
 */
-class Thumbnail{
+class Thumbnail extends EventEmitter{
 
-    constructor(media, number){
-        this.media = media;
+    constructor(type, url, number){
+        super();
+        this.type = type;
+        this.url = url;
         this.number = number;
         this.root = null;
     }
     initDOM(){
-        let type =
-            (this.media instanceof Video) ? "video" : "image";
+        const src = (this.type ==='video') ?
+                    "images/video_icon.png":
+                     this.url;
+
         const elem = `
-        <div class="item" type=${type}>
-            <img src=${this.media.src()}>
+        <div class="item" type=${this.type}>
+            <img src=${src}>
         </div>
         `;
+
         this.root = $(elem);
 
-        //клик на thumbnail
-        const context = this;
-        this.root.bind('click', function(){
-            emitter.emit('click_thumbnail', context.number);
+        this.root.bind('click', () => {
+            this.emit('CLICK_THUMBNAIL', this.number);
         });
         return this.root;
     }
 
-    /*представление элемента для отображения во Viewer*/
-    getPreview(){
-       return this.media.preview();
-    }
-
-    /*получить номер текущего thumbnail*/
+    /*получить номер текущего thumbnailList*/
     getNumber(){
         return this.number;
-    }
-
-    animate(){
-        this.media.animate();
-    }
-
-    /*закрыть элемент (если видео)*/
-    close(){
-        if (this.media instanceof Video)
-            this.media.close();
     }
 
     /*отступ элемента слева*/

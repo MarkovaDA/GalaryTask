@@ -18,7 +18,11 @@
     <script>
         $(document).ready(function(){
             const slider = new Slider();
-            slider.init();
+            $.getJSON('server/data.json',
+                (data) =>
+                {
+                    slider.init(data)
+                });
         });
 
     </script>

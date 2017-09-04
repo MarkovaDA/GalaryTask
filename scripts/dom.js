@@ -12,4 +12,5 @@ $(document).ready(function(){
     $('#viewer').mouseleave(function () {
         $('.arrow').fadeOut(100);
     });
+
 });

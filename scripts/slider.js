@@ -1,36 +1,37 @@
 //здесь будет класс, обеспечивающий
 //взаимодействие галереии и обозревателя
-class Slider {
+class Slider extends EventEmitter{
 	constructor(){
+        super();
+        this.viewer = new Viewer();
 
-		this.viewer = new Viewer();
+		this.thumbnailList = new ThumbnailList();
 
-		this.thumbnail = new ThumbnailList();
-
-		emitter.subscribe('choose_thumbnail', thumbnail => {
-			//передаем выбранный thumbnail для отображения во viewer
-			this.viewer.view(thumbnail);
+		//viewer: отобразить следующий/предыдущий элемент
+		this.viewer.subscribe('VIEW_ANOTHER',(number)=>{
+            const count = this.thumbnailList.count();
+            if (number < 0)
+                number = count - 1;
+            if (number >= count)
+                number = 0;
+            const anotherItem = this.thumbnailList.thumbnails[number];
+			this.viewer.view(anotherItem.type, anotherItem.url, number);
 		});
 
-        //viewer:отобразить следующий или предыдущий элемент во viewer
-		emitter.subscribe('view_another', number => {
-			emitter.emit('click_thumbnail', number);
+		//thumbnailList:отобразить выбранный thumbnail
+        this.thumbnailList.subscribe('CHOOSE_THUMBNAIL', (data) => {
+			this.viewer.view(data.type, data.url, data.number);
 		});
 	}
-	/*чтение json-данных*/
-	init(){
 
-        const context = this;
+	init(data){
 
-		$.getJSON('server/data.json',function(data){
-            $.each(data.objects, function(index, item) {
-				if (item.type === "image") {
-                    context.thumbnail.add(new Image(item.url));
-				}
-				else if (item.type === "video") {
-                    context.thumbnail.add(new Video(item.url));
-				}
-			});
-		});
+        $.each(data.objects, (index, item) => {
+            if (item.type === "image") {
+                this.thumbnailList.add(item.type, item.url);
+            } else if (item.type === "video") {
+                this.thumbnailList.add(item.type, item.url);
+            }
+        });
 	}
 }
