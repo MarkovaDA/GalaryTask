@@ -2,91 +2,118 @@
 /*
 * Лента прокрутки элементов
 */
-class ThumbnailList extends EventEmitter{
 
+/*const  WIDTH = 120;*/
+
+class ThumbnailList extends EventEmitter{
     constructor(){
         super();
 
         this.thumbnails = [];
-        this.current = 0;//номер текущего thumbnail
-        this.w = 120;
+        this.currentIndex = 0;//номер текущего thumbnail
+        this.width = 120;
+        this.root = null;
 
-        DOMEvents.mouseThumbnailBehaviour();
-        DOMEvents.bindThumbnailNext(this.next.bind(this));
-        DOMEvents.bindThumbnailPrev(this.prev.bind(this));
+        this.initDOM();
+        this.bindDOMEvents();
     }
-    add(type, url){
-        const thumbnail = new Thumbnail(type, url, this.count());
+    initDOM(){
+        //this.root = $('.collection');
+        this.root = $(`
+            <div class="collection">
+                <div class="small-arrow small-arrow-left"></div>
+                <div class="small-arrow small-arrow-right"></div>
+            </div>
+        `);
+    }
+
+    add(data){
+        const thumbnail = new Thumbnail(data);
 
         //thumbnail: выбран новый элемент для отображения
-        thumbnail.on('CLICK_THUMBNAIL', (number)=>{
-            this.onClickThumbnail(number);
+        thumbnail.on('CLICK_THUMBNAIL', (index)=> {
+            this.onClickThumbnail(index);
         });
 
         this.thumbnails.push(thumbnail);
 
-        $('#collection')
-            .append(thumbnail.initDOM());
-        thumbnail.leftOffset(this.count() * this.w);
+        this.root.append(thumbnail.root);
+
+        thumbnail.leftOffset(this.count() * this.width);
     }
-    onClickThumbnail(number){
-        const count = this.count();
-        if (number < 0)
-            number = count - 1;
-        if (number >= count)
-            number = 0;
-
-        this.current = number;
-
-        this.emit('CHOOSE_THUMBNAIL', this.getInfo(number));
+    onClickThumbnail(index){
+        this.currentIndex = index;
+        this.emit('CHOOSE_THUMBNAIL', index);
     }
     /*прокрутка вправо*/
     next(){
-        const _w = this.w;
+        const w = this.width;
         const length = this.count();
         //расчет смещений для прокрутки
         this.thumbnails.forEach(function (elem) {
             let value;
-            const rightBorder = elem.rightOffset();
-            if (rightBorder < 0)
+            const maxRightOffset = elem.rightOffset();
+
+            if (maxRightOffset < 0) {
                 value = 0;
-            else {
+            } else {
                 const currentLeft = elem.leftOffset();
-                value = currentLeft + _w;
+                value = currentLeft + w;
             }
+
             elem.leftOffset(value);
         });
 
         //обновление номера текущего слайда
-        if (++this.current >= length)
-            this.current = 0;
 
-        this.emit('CHOOSE_THUMBNAIL', this.getInfo(this.current));
+        let newIndex = this.currentIndex + 1;
+
+        if (newIndex >= length) {
+            newIndex = 0;
+        }
+        this.currentIndex = newIndex;
+
+        this.emit('CHOOSE_THUMBNAIL', newIndex);
     }
 
     /*прокрутка влево*/
     prev(){
-        const _w = this.w;
-        let totalWidth = parseFloat($('#collection').width()); /*ширина всей конвейерной ленты*/
+        const w = this.width;
+        const totalWidth = parseFloat(this.root.width()); /*ширина всей конвейерной ленты*/
 
         //расчет смещений  для элементов ленты
         this.thumbnails.forEach(function (elem) {
            let value;
-            const leftBorder = elem.leftOffset();
-            if (leftBorder === 0 || leftBorder < 0) {
-                value = totalWidth - _w;
+            const maxLeftOffset = elem.leftOffset();
+            if (maxLeftOffset === 0 || maxLeftOffset < 0) {
+                value = totalWidth - w;
             }
             else {
-                value = leftBorder - _w;
+                value = maxLeftOffset - w;
             }
             elem.leftOffset(value);
         });
 
         //обновление номера текущего слайда
-        if (--this.current < 0)
-            this.current = this.count() - 1;
+        let newIndex = this.currentIndex - 1;
+        if (newIndex < 0) {
+            newIndex = this.count() - 1;
+        }
+        this.currentIndex = newIndex;
 
-        this.emit('CHOOSE_THUMBNAIL', this.getInfo(this.current));
+        this.emit('CHOOSE_THUMBNAIL', newIndex);
+    }
+    get(index){
+        let newIndex;
+
+        if (index == this.count()){
+            newIndex = 0;
+        } else if (index < 0){
+            newIndex = this.count() - 1;
+        } else {
+            newIndex = index;
+        }
+        return this.thumbnails[newIndex];
     }
 
     /*кол-во слайдов в галерее*/
@@ -94,9 +121,19 @@ class ThumbnailList extends EventEmitter{
         return this.thumbnails.length;
     }
 
-    /*данные выбранного thumbnail*/
-    getInfo(number){
-        const thumbnail = this.thumbnails[number];
-        return {'type': thumbnail.type, 'url': thumbnail.url, 'number': number};
+    bindDOMEvents(){
+        const root = this.root;
+
+        root.find('.small-arrow-left').bind('click', this.next.bind(this));
+
+        root.find('.small-arrow-right').bind('click', this.prev.bind(this));
+
+        root.mouseover(function () {
+            root.find('.small-arrow').fadeIn(100);
+        });
+
+        root.mouseleave(function () {
+            root.find('.small-arrow').fadeOut(100);
+        });
     }
 }

@@ -1,19 +1,21 @@
 class Image extends MediaObject {
-    constructor(_url){
-        super(_url);
+    constructor(url){
+        super(url);
         this.root = null;
+
+        this.initDOM();
     }
 
-    preview(){
-        const elem = `
+    initDOM(){
+        this.root = $(`
             <img src=${this.url}>
-        `;
-        this.root = $(elem);
+        `);
         return this.root;
     }
 
     /*стратегия анимации элемента*/
     animate(){
+        //TODO: написать красивее, заменить метод css на другой
         this.root.css('width', '30%');
         this.root.animate({'width':'50%'},300);
     }

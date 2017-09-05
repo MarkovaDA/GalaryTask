@@ -1,43 +1,52 @@
 //здесь будет класс, обеспечивающий
 //взаимодействие галереии и обозревателя
-class Slider extends EventEmitter{
-	constructor(url){
-        super();
+class Slider {
+	constructor(url, elem){
+        this.data = [];
+        this.root = elem;
 
-        this.viewer = new Viewer();
-
-		this.thumbnailList = new ThumbnailList();
-
-		//viewer: отобразить следующий/предыдущий элемент
-		this.viewer.on('VIEW_ANOTHER',(number)=>{
-            const count = this.thumbnailList.count();
-            if (number < 0)
-                number = count - 1;
-            if (number >= count)
-                number = 0;
-            const anotherItem = this.thumbnailList.thumbnails[number];
-			this.viewer.view(anotherItem.type, anotherItem.url, number);
-		});
-
-		//thumbnailList:отобразить выбранный thumbnail
-        this.thumbnailList.on('CHOOSE_THUMBNAIL', (data) => {
-			this.viewer.view(data.type, data.url, data.number);
-		});
-
-        this.init(url);
+        $.getJSON(url).then((data) => {
+            this.data = data;
+            //инициализация thumbnailsList
+            this.initThumbnails();
+            //инициализация Viewer
+            this.initViewer();
+            //привязка событий
+            this.bindEvents();
+        });
 	}
 
-	init(url){
-        $.getJSON(url, (data) =>
-            {
-                $.each(data.objects, (index, item) => {
-                    if (item.type === "image") {
-                        this.thumbnailList.add(item.type, item.url);
-                    } else if (item.type === "video") {
-                        this.thumbnailList.add(item.type, item.url);
-                    }
-                });
-            });
-
+	initViewer(){
+        const elem = this.viewer = new Viewer();
+        //добавляем копонент в слайдер
+        this.root.append(elem.root);
 	}
+
+
+    initThumbnails() {
+        const elem = this.thumbnailList = new ThumbnailList(this.data);
+
+        this.root.append(elem.root);
+
+        elem.bindDOMEvents();//говнокод
+
+        $.each(this.data, (index, item) => {
+            item.index = index;
+            this.thumbnailList.add(item);
+        });
+    }
+
+    bindEvents() {
+        //thumbnailList:отобразить выбранный thumbnail
+        this.thumbnailList.on('CHOOSE_THUMBNAIL', (index) => {
+            const exploredItem = this.thumbnailList.get(index);
+            this.viewer.view(exploredItem.data);
+        });
+
+        //viewer: отобразить следующий/предыдущий элемент
+        this.viewer.on('VIEW_ANOTHER',(index)=>{
+            const anotherItem = this.thumbnailList.get(index);
+            this.viewer.view(anotherItem.data);
+        });
+    }
 }

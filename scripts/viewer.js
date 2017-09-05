@@ -2,48 +2,71 @@ class Viewer extends EventEmitter{
 
     constructor(){
         super();
-        this.lastNumber = null;
+        this.lastIndex = null;
         this.lastItem = null;
-
-        this.cacheNodes();
-
-        DOMEvents.mouseViewerBehaviour();
-        DOMEvents.bindViewerNext(this.next.bind(this));
-        DOMEvents.bindViewerPrev(this.prev.bind(this));
+        this.root = null;
+        this.initDOM();
+        this.bindDOMEvents();
     }
-    cacheNodes() {
-        this.nodes = {
-            exploreZone:  $('#viewer .explore-zone')
-        };
-    }
-    view(type, url, number){
 
+    initDOM(){
+        this.root = $(`
+            <div class="viewer">
+                <div class="arrow arrow-left"></div>
+                <div class="arrow arrow-right"></div>
+                <div>
+                    <div class="explore-zone">
+                        <p>Выберите элемент для просмотра</p>
+                    </div>
+                </div>
+            </div>
+        `);
+        return this.root;
+    }
+    view(data){
         if (this.lastItem != null){
-            //зпкрываем предыдущий элемент
+            //закрываем предыдущий элемент
             this.lastItem.close();
         }
         //формируем элемент для отображения
         let media;
-        if (type === 'image')
-            media = new Image(url);
-        if (type === 'video')
-            media = new Video(url);
 
-        this.lastNumber = number;
+        if (data.type === 'image') {
+            media = new Image(data.url);
+        } else if (data.type === 'video') {
+            media = new Video(data.url);
+        }
+
+        this.lastIndex = data.index;
+
         this.lastItem = media;
-        //добавляем в область просмотра
-        this.nodes.exploreZone
-             .empty()
-             .append(media.preview());
+
+        this.root.find('.explore-zone').empty().append(media.root);
 
         media.animate();
     }
     //запрашиваем следующий элемент для отображения
     next(){
-		this.emit('VIEW_ANOTHER', this.lastNumber + 1);
+		this.emit('VIEW_ANOTHER', this.lastIndex + 1);
     }
     //запрашиваем предыдущий элемент для отображения
     prev(){
-		this.emit('VIEW_ANOTHER', this.lastNumber - 1);
+		this.emit('VIEW_ANOTHER', this.lastIndex - 1);
+    }
+
+    bindDOMEvents(){
+        const root = this.root;
+
+        root.mouseover(()=>{
+            root.find('.arrow').fadeIn(100);
+        });
+
+        root.mouseleave(()=>{
+            root.find('.arrow').fadeOut(100);
+        });
+
+        root.find('.arrow-right').on('click', this.next.bind(this));
+
+        root.find('.arrow-left').on('click', this.prev.bind(this));
     }
 }

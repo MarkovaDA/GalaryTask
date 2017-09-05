@@ -1,13 +1,13 @@
 class MediaObject {
-    constructor(_url){
-        this.url = _url;
+    constructor(url){
+        this.url = url;
     }
     /*url элемента*/
     src(){
         return this.url;
     }
     /*представление элемента во viewer*/
-    preview(){
+    initDOM(){
 
     }
     /*анимация элемента при появлении*/

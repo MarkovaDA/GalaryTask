@@ -2,33 +2,29 @@
 * Единичный элемент ленты
 * инкапсулирует методы работы с медиа-объектом
 */
-class Thumbnail extends EventEmitter{
+class Thumbnail extends EventEmitter {
 
-    constructor(type, url, number){
+    constructor(data){
         super();
-        this.type = type;
-        this.url = url;
-        this.number = number;
+        this.data = data; //{type,url,index}
         this.root = null;
         this.iconImage = "images/video_icon.png";
+        this.initDOM();
     }
     initDOM(){
         //для видео-элементов единая иконка
-        const src = (this.type ==='video') ?
-                     this.iconImage:
-                     this.url;
+        const src = this.data.type === 'video' ? this.iconImage : this.data.url;
 
-        const elem = `
-        <div class="item" type=${this.type}>
-            <img src=${src}>
-        </div>
-        `;
+        this.root = $(`
+            <div class="item" type=${this.data.type}>
+                <img src=${src}>
+            </div>
+        `);
 
-        this.root = $(elem);
-
-        this.root.bind('click', () => {
-            this.emit('CLICK_THUMBNAIL', this.number);
+        this.root.on('click', () => {
+            this.emit('CLICK_THUMBNAIL', this.data.index);
         });
+
         return this.root;
     }
 
@@ -36,15 +32,14 @@ class Thumbnail extends EventEmitter{
     leftOffset(value){
         if (typeof value !== 'undefined') {
             this.root.offset({left: value});
-        }
-        else {
+        } else { // TODO: Неправильно!
             return parseFloat(this.root.offset().left);
         }
     }
 
     /*отступ элемента справа*/
     rightOffset(){
-        return parseFloat(this.root.css('right'));
+        return parseFloat(this.root.css('right')); // TODO: Неправильно!!!
     }
 
 }

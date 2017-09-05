@@ -5,7 +5,6 @@
     <title>Gallery task</title>
     <link href="styles/slider.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="scripts/dom.js"></script>
 	<script type="text/javascript" src="scripts/event_emitter.js"></script>
     <script type="text/javascript" src="scripts/models/media_object.js"></script>
     <script type="text/javascript" src="scripts/models/image.js"></script>
@@ -17,32 +16,12 @@
 
     <script>
         $(document).ready(function(){
-            const slider = new Slider('server/data.json');
+            const slider = new Slider('server/data.json', $('.slider'));
         });
-
     </script>
 </head>
 <body>
-    <div id="slider">
-        <!--обзор текущего элемента-->
-        <div id="viewer">
-            <div class="arrow arrow-left" id="viewer_left"></div>
-            <div class="arrow arrow-right" id="viewer_right"></div>
-
-            <div class="explore-zone">
-                <!--зона просмотра элемента-->
-                <p>Выберите элемент для просмотра</p>
-            </div>
-        </div>
-        <!--набор элементов для обзора-->
-        <div id="collection">
-            <!--прокрутка влево-->
-            <div class="small-arrow small-arrow-left" id="tape_left"></div>
-            <!--иконки картинок-->
-
-            <!--прокрутка вправо-->
-            <div class="small-arrow small-arrow-right" id="tape_right"></div>
-        </div>
+    <div class="slider">
     </div>
 </body>
 </html>

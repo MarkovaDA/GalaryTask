@@ -1,8 +1,5 @@
 
-html,body, #slider{
-
-}
-#viewer{
+.viewer{
     width: 80%;
     height:70%;
     background: #2f353b;
@@ -10,7 +7,7 @@ html,body, #slider{
     left: 10%;
     top: 15%;
 }
-#viewer img, #viewer video{
+.viewer img, .viewer video{
     width: 50%;
     height: auto;
     margin: auto;
@@ -23,7 +20,7 @@ html,body, #slider{
     color:orange;
 }
 
-#collection{
+.collection{
     display: flex;
     width: 96%;
     height: 12%;
