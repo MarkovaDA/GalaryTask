@@ -1,14 +1,15 @@
 //здесь будет класс, обеспечивающий
 //взаимодействие галереии и обозревателя
 class Slider extends EventEmitter{
-	constructor(){
+	constructor(url){
         super();
+
         this.viewer = new Viewer();
 
 		this.thumbnailList = new ThumbnailList();
 
 		//viewer: отобразить следующий/предыдущий элемент
-		this.viewer.subscribe('VIEW_ANOTHER',(number)=>{
+		this.viewer.on('VIEW_ANOTHER',(number)=>{
             const count = this.thumbnailList.count();
             if (number < 0)
                 number = count - 1;
@@ -19,19 +20,24 @@ class Slider extends EventEmitter{
 		});
 
 		//thumbnailList:отобразить выбранный thumbnail
-        this.thumbnailList.subscribe('CHOOSE_THUMBNAIL', (data) => {
+        this.thumbnailList.on('CHOOSE_THUMBNAIL', (data) => {
 			this.viewer.view(data.type, data.url, data.number);
 		});
+
+        this.init(url);
 	}
 
-	init(data){
+	init(url){
+        $.getJSON(url, (data) =>
+            {
+                $.each(data.objects, (index, item) => {
+                    if (item.type === "image") {
+                        this.thumbnailList.add(item.type, item.url);
+                    } else if (item.type === "video") {
+                        this.thumbnailList.add(item.type, item.url);
+                    }
+                });
+            });
 
-        $.each(data.objects, (index, item) => {
-            if (item.type === "image") {
-                this.thumbnailList.add(item.type, item.url);
-            } else if (item.type === "video") {
-                this.thumbnailList.add(item.type, item.url);
-            }
-        });
 	}
 }

@@ -10,10 +10,12 @@ class Thumbnail extends EventEmitter{
         this.url = url;
         this.number = number;
         this.root = null;
+        this.iconImage = "images/video_icon.png";
     }
     initDOM(){
+        //для видео-элементов единая иконка
         const src = (this.type ==='video') ?
-                    "images/video_icon.png":
+                     this.iconImage:
                      this.url;
 
         const elem = `
@@ -28,11 +30,6 @@ class Thumbnail extends EventEmitter{
             this.emit('CLICK_THUMBNAIL', this.number);
         });
         return this.root;
-    }
-
-    /*получить номер текущего thumbnailList*/
-    getNumber(){
-        return this.number;
     }
 
     /*отступ элемента слева*/

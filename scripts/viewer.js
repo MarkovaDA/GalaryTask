@@ -4,20 +4,25 @@ class Viewer extends EventEmitter{
         super();
         this.lastNumber = null;
         this.lastItem = null;
-        $('#viewer_right').bind('click', this.next.bind(this));
-        $('#viewer_left').bind('click', this.prev.bind(this));
+
+        this.cacheNodes();
+
+        DOMEvents.mouseViewerBehaviour();
+        DOMEvents.bindViewerNext(this.next.bind(this));
+        DOMEvents.bindViewerPrev(this.prev.bind(this));
     }
     cacheNodes() {
         this.nodes = {
-            buttonLeft: '',
-            buttonRight: '',
-            exploreZone: '',
+            exploreZone:  $('#viewer .explore-zone')
         };
     }
     view(type, url, number){
+
         if (this.lastItem != null){
+            //зпкрываем предыдущий элемент
             this.lastItem.close();
         }
+        //формируем элемент для отображения
         let media;
         if (type === 'image')
             media = new Image(url);
@@ -26,10 +31,10 @@ class Viewer extends EventEmitter{
 
         this.lastNumber = number;
         this.lastItem = media;
-
-        $('#viewer .explore_zone')
-            .empty()
-            .append(media.preview());
+        //добавляем в область просмотра
+        this.nodes.exploreZone
+             .empty()
+             .append(media.preview());
 
         media.animate();
     }

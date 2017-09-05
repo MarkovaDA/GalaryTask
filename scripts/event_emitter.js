@@ -11,7 +11,7 @@ class EventEmitter {
 			});
 		}
 	}
-	subscribe(eventName, fn) {
+	on(eventName, fn) {
 		if(!this.events[eventName]) {
 			this.events[eventName] = [];
 		}

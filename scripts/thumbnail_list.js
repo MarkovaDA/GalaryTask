@@ -8,20 +8,23 @@ class ThumbnailList extends EventEmitter{
         super();
 
         this.thumbnails = [];
-        this.current = 0;
+        this.current = 0;//номер текущего thumbnail
         this.w = 120;
 
-        $('#tape_right').bind('click', this.next.bind(this));
-        $('#tape_left').bind('click', this.prev.bind(this));
+        DOMEvents.mouseThumbnailBehaviour();
+        DOMEvents.bindThumbnailNext(this.next.bind(this));
+        DOMEvents.bindThumbnailPrev(this.prev.bind(this));
     }
     add(type, url){
         const thumbnail = new Thumbnail(type, url, this.count());
 
-
-        thumbnail.subscribe('CLICK_THUMBNAIL', (number)=>{
+        //thumbnail: выбран новый элемент для отображения
+        thumbnail.on('CLICK_THUMBNAIL', (number)=>{
             this.onClickThumbnail(number);
         });
+
         this.thumbnails.push(thumbnail);
+
         $('#collection')
             .append(thumbnail.initDOM());
         thumbnail.leftOffset(this.count() * this.w);
@@ -32,10 +35,10 @@ class ThumbnailList extends EventEmitter{
             number = count - 1;
         if (number >= count)
             number = 0;
-        this.current = parseInt(number);
-        const type = this.thumbnails[number].type;
-        const url =  this.thumbnails[number].url;
-        this.emit('CHOOSE_THUMBNAIL', {"type":type, "url":url, "number":number});
+
+        this.current = number;
+
+        this.emit('CHOOSE_THUMBNAIL', this.getInfo(number));
     }
     /*прокрутка вправо*/
     next(){
@@ -58,10 +61,7 @@ class ThumbnailList extends EventEmitter{
         if (++this.current >= length)
             this.current = 0;
 
-        const type = this.thumbnails[this.current].type;
-        const url =  this.thumbnails[this.current].url;
-
-        this.emit('CHOOSE_THUMBNAIL', {"type":type, "url":url, "number":this.current});
+        this.emit('CHOOSE_THUMBNAIL', this.getInfo(this.current));
     }
 
     /*прокрутка влево*/
@@ -86,14 +86,17 @@ class ThumbnailList extends EventEmitter{
         if (--this.current < 0)
             this.current = this.count() - 1;
 
-        const type = this.thumbnails[this.current].type;
-        const url =  this.thumbnails[this.current].url;
-
-        this.emit('CHOOSE_THUMBNAIL', {"type":type, "url":url, "number": this.current});
+        this.emit('CHOOSE_THUMBNAIL', this.getInfo(this.current));
     }
 
     /*кол-во слайдов в галерее*/
     count(){
         return this.thumbnails.length;
+    }
+
+    /*данные выбранного thumbnail*/
+    getInfo(number){
+        const thumbnail = this.thumbnails[number];
+        return {'type': thumbnail.type, 'url': thumbnail.url, 'number': number};
     }
 }

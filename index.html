@@ -7,9 +7,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/dom.js"></script>
 	<script type="text/javascript" src="scripts/event_emitter.js"></script>
-    <script type="text/javascript" src="scripts/media_object.js"></script>
-    <script type="text/javascript" src="scripts/image.js"></script>
-    <script type="text/javascript" src="scripts/video.js"></script>
+    <script type="text/javascript" src="scripts/models/media_object.js"></script>
+    <script type="text/javascript" src="scripts/models/image.js"></script>
+    <script type="text/javascript" src="scripts/models/video.js"></script>
 	<script type="text/javascript" src="scripts/slider.js"></script>
     <script type="text/javascript" src="scripts/thumbnail_list.js"></script>
     <script type="text/javascript" src="scripts/viewer.js"></script>
@@ -17,12 +17,7 @@
 
     <script>
         $(document).ready(function(){
-            const slider = new Slider();
-            $.getJSON('server/data.json',
-                (data) =>
-                {
-                    slider.init(data)
-                });
+            const slider = new Slider('server/data.json');
         });
 
     </script>
@@ -31,10 +26,10 @@
     <div id="slider">
         <!--обзор текущего элемента-->
         <div id="viewer">
-            <div class="arrow arrow_left" id="viewer_left"></div>
-            <div class="arrow arrow_right" id="viewer_right"></div>
+            <div class="arrow arrow-left" id="viewer_left"></div>
+            <div class="arrow arrow-right" id="viewer_right"></div>
 
-            <div class="explore_zone">
+            <div class="explore-zone">
                 <!--зона просмотра элемента-->
                 <p>Выберите элемент для просмотра</p>
             </div>
@@ -42,11 +37,11 @@
         <!--набор элементов для обзора-->
         <div id="collection">
             <!--прокрутка влево-->
-            <div class="small_arrow small_arrow_left" id="tape_left"></div>
+            <div class="small-arrow small-arrow-left" id="tape_left"></div>
             <!--иконки картинок-->
 
             <!--прокрутка вправо-->
-            <div class="small_arrow small_arrow_right" id="tape_right"></div>
+            <div class="small-arrow small-arrow-right" id="tape_right"></div>
         </div>
     </div>
 </body>

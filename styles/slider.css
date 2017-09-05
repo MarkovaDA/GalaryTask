@@ -17,7 +17,7 @@ html,body, #slider{
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
 }
-.explore_zone{
+.explore-zone{
     text-align: center;
     vertical-align: middle;
     color:orange;
@@ -25,12 +25,12 @@ html,body, #slider{
 
 #collection{
     display: flex;
-    width: 90%;
+    width: 96%;
     height: 12%;
     position: absolute;
     bottom: 10px;
     overflow: hidden;
-    /*left: 5%;*/
+    left: 2%;
 }
 .item{
     height: 95%;
@@ -63,7 +63,7 @@ html,body, #slider{
     box-shadow: 0 0 2px rgba(0,0,0,0.5);
     display:none;
 }
-.arrow_left{
+.arrow-left{
     width: 50px;
     height: 100%;
     background-image: url('../images/arrow_left.png');
@@ -71,15 +71,15 @@ html,body, #slider{
     top: 0px;
     left: 0px;
 }
-.small_arrow_left{
+.small-arrow-left{
     background-image: url('../images/arrow_left_circle.png');
     left: 0px;
 }
-.small_arrow_right{
+.small-arrow-right{
     background-image: url('../images/arrow_right_circle.png');
     right: 0px;
 }
-.small_arrow{
+.small-arrow{
     top: 0px;
     width:30px;
     height:100%;
@@ -95,7 +95,7 @@ html,body, #slider{
 .selection{
     border-top:3px solid rgba(255,153,0,1);
 }
-.arrow_right{
+.arrow-right{
     width: 50px;
     height: 100%;
     background-image: url('../images/arrow_right.png');
