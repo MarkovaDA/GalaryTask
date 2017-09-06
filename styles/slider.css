@@ -63,17 +63,17 @@
 .arrow-left{
     width: 50px;
     height: 100%;
-    background-image: url('../images/arrow_left.png');
+    background-image: url('../images/arrow-left.png');
     position: absolute;
     top: 0px;
     left: 0px;
 }
 .small-arrow-left{
-    background-image: url('../images/arrow_left_circle.png');
+    background-image: url('../images/arrow-left-circle.png');
     left: 0px;
 }
 .small-arrow-right{
-    background-image: url('../images/arrow_right_circle.png');
+    background-image: url('../images/arrow-right-circle.png');
     right: 0px;
 }
 .small-arrow{
@@ -95,7 +95,7 @@
 .arrow-right{
     width: 50px;
     height: 100%;
-    background-image: url('../images/arrow_right.png');
+    background-image: url('../images/arrow-right.png');
     position: absolute;
     top: 0px;
     right: 0px;

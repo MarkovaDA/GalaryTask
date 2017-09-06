@@ -7,28 +7,26 @@ class Slider {
 
         $.getJSON(url).then((data) => {
             this.data = data;
-            //инициализация thumbnailsList
+
             this.initThumbnails();
-            //инициализация Viewer
+
             this.initViewer();
-            //привязка событий
+
             this.bindEvents();
         });
 	}
 
 	initViewer(){
         const elem = this.viewer = new Viewer();
-        //добавляем копонент в слайдер
+        //добавляем копонент viewer в слайдер
         this.root.append(elem.root);
 	}
 
 
     initThumbnails() {
         const elem = this.thumbnailList = new ThumbnailList(this.data);
-
+        //добавляем копонент thumbnailList в слайдер
         this.root.append(elem.root);
-
-        elem.bindDOMEvents();//говнокод
 
         $.each(this.data, (index, item) => {
             item.index = index;

@@ -11,6 +11,7 @@ class ThumbnailList extends EventEmitter{
 
         this.thumbnails = [];
         this.currentIndex = 0;//номер текущего thumbnail
+        this.prevIndex = 0; //номер предыдущего отображаемого thumbnail
         this.width = 120;
         this.root = null;
 
@@ -18,7 +19,6 @@ class ThumbnailList extends EventEmitter{
         this.bindDOMEvents();
     }
     initDOM(){
-        //this.root = $('.collection');
         this.root = $(`
             <div class="collection">
                 <div class="small-arrow small-arrow-left"></div>
@@ -31,7 +31,7 @@ class ThumbnailList extends EventEmitter{
         const thumbnail = new Thumbnail(data);
 
         //thumbnail: выбран новый элемент для отображения
-        thumbnail.on('CLICK_THUMBNAIL', (index)=> {
+        thumbnail.on('CLICK_THUMBNAIL', (index) => {
             this.onClickThumbnail(index);
         });
 
@@ -42,7 +42,11 @@ class ThumbnailList extends EventEmitter{
         thumbnail.leftOffset(this.count() * this.width);
     }
     onClickThumbnail(index){
+        this.prevIndex = this.currentIndex;
         this.currentIndex = index;
+
+        this.selectChosen();
+
         this.emit('CHOOSE_THUMBNAIL', index);
     }
     /*прокрутка вправо*/
@@ -64,14 +68,17 @@ class ThumbnailList extends EventEmitter{
             elem.leftOffset(value);
         });
 
-        //обновление номера текущего слайда
+        this.prevIndex = this.currentIndex;
 
+        //обновление номера текущего слайда
         let newIndex = this.currentIndex + 1;
 
         if (newIndex >= length) {
             newIndex = 0;
         }
         this.currentIndex = newIndex;
+
+        this.selectChosen();
 
         this.emit('CHOOSE_THUMBNAIL', newIndex);
     }
@@ -87,19 +94,20 @@ class ThumbnailList extends EventEmitter{
             const maxLeftOffset = elem.leftOffset();
             if (maxLeftOffset === 0 || maxLeftOffset < 0) {
                 value = totalWidth - w;
-            }
-            else {
+            } else {
                 value = maxLeftOffset - w;
             }
             elem.leftOffset(value);
         });
-
+        this.prevIndex = this.currentIndex;
         //обновление номера текущего слайда
         let newIndex = this.currentIndex - 1;
         if (newIndex < 0) {
             newIndex = this.count() - 1;
         }
         this.currentIndex = newIndex;
+
+        this.selectChosen();
 
         this.emit('CHOOSE_THUMBNAIL', newIndex);
     }
@@ -121,12 +129,17 @@ class ThumbnailList extends EventEmitter{
         return this.thumbnails.length;
     }
 
+    selectChosen(){
+        this.thumbnails[this.currentIndex].addSelection();//подсветка выбранного элемента
+        this.thumbnails[this.prevIndex].removeSelection();//снятие выделения с предыдущего элемента
+    }
+
     bindDOMEvents(){
         const root = this.root;
 
-        root.find('.small-arrow-left').bind('click', this.next.bind(this));
+        root.find('.small-arrow-left').on('click', this.prev.bind(this));
 
-        root.find('.small-arrow-right').bind('click', this.prev.bind(this));
+        root.find('.small-arrow-right').on('click', this.next.bind(this));
 
         root.mouseover(function () {
             root.find('.small-arrow').fadeIn(100);

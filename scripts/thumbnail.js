@@ -3,12 +3,13 @@
 * инкапсулирует методы работы с медиа-объектом
 */
 class Thumbnail extends EventEmitter {
-
     constructor(data){
         super();
+
         this.data = data; //{type,url,index}
         this.root = null;
-        this.iconImage = "images/video_icon.png";
+        this.iconImage = "images/video-icon.png";
+
         this.initDOM();
     }
     initDOM(){
@@ -28,18 +29,28 @@ class Thumbnail extends EventEmitter {
         return this.root;
     }
 
+    //выделить thumbnail
+    addSelection(){
+        this.root.addClass('selection');
+    }
+
+    //снять выделение
+    removeSelection(){
+        this.root.removeClass('selection');
+    }
+
     /*отступ элемента слева*/
     leftOffset(value){
         if (typeof value !== 'undefined') {
             this.root.offset({left: value});
-        } else { // TODO: Неправильно!
+        } else {
             return parseFloat(this.root.offset().left);
         }
     }
 
     /*отступ элемента справа*/
     rightOffset(){
-        return parseFloat(this.root.css('right')); // TODO: Неправильно!!!
+        return this.root.parent().width() - (this.leftOffset() + this.root.outerWidth());
     }
 
 }

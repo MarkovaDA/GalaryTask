@@ -1,6 +1,7 @@
 class Image extends MediaObject {
     constructor(url){
         super(url);
+
         this.root = null;
 
         this.initDOM();
@@ -15,8 +16,7 @@ class Image extends MediaObject {
 
     /*стратегия анимации элемента*/
     animate(){
-        //TODO: написать красивее, заменить метод css на другой
-        this.root.css('width', '30%');
+        this.root.width('30%');
         this.root.animate({'width':'50%'},300);
     }
 }

@@ -1,10 +1,11 @@
 class Viewer extends EventEmitter{
-
     constructor(){
         super();
+
         this.lastIndex = null;
         this.lastItem = null;
         this.root = null;
+
         this.initDOM();
         this.bindDOMEvents();
     }
@@ -21,6 +22,7 @@ class Viewer extends EventEmitter{
                 </div>
             </div>
         `);
+
         return this.root;
     }
     view(data){
