@@ -15,6 +15,7 @@ class EventEmitter {
 		if(!this.events[eventName]) {
 			this.events[eventName] = [];
 		}
+
 		this.events[eventName].push(fn);
 		return () => {
 			this.events[eventName] = this.events[eventName]

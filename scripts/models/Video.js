@@ -14,14 +14,17 @@ class Video extends MediaObject {
                 <source src=${this.url} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
             </video>
         `);
+
         return this.root;
     }
     animate(){
-        this.root.animate({'width':'50%'},300);
+        this.root.animate({
+            'width':'50%'
+        }, 300);
     }
 
     close(){
         this.root.get(0).pause();
-        console.log("video stopping");
+        console.log('video stopping');
     }
 }

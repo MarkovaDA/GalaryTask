@@ -5,6 +5,8 @@ class Slider {
         this.data = [];
         this.root = elem;
 
+        this.chosenIndex = 0;
+
         $.getJSON(url).then((data) => {
             this.data = data;
 
@@ -17,34 +19,36 @@ class Slider {
 	}
 
 	initViewer(){
-        const elem = this.viewer = new Viewer();
+        this.viewer = new Viewer();
         //добавляем копонент viewer в слайдер
-        this.root.append(elem.root);
+        this.root.append(this.viewer.root);
 	}
 
 
     initThumbnails() {
-        const elem = this.thumbnailList = new ThumbnailList(this.data);
+        this.thumbnailList = new ThumbnailList(this.data);
         //добавляем копонент thumbnailList в слайдер
-        this.root.append(elem.root);
-
-        $.each(this.data, (index, item) => {
-            item.index = index;
-            this.thumbnailList.add(item);
-        });
+        this.root.append(this.thumbnailList.root);
     }
 
     bindEvents() {
         //thumbnailList:отобразить выбранный thumbnail
         this.thumbnailList.on('CHOOSE_THUMBNAIL', (index) => {
-            const exploredItem = this.thumbnailList.get(index);
-            this.viewer.view(exploredItem.data);
+            this.chosenIndex = index;
+            this.viewer.view(this.data[index]);
         });
 
         //viewer: отобразить следующий/предыдущий элемент
-        this.viewer.on('VIEW_ANOTHER',(index)=>{
-            const anotherItem = this.thumbnailList.get(index);
-            this.viewer.view(anotherItem.data);
+        this.viewer.on('VIEW_ANOTHER',(delta) => {
+
+            let anotherIndex = this.chosenIndex + delta;
+            if (anotherIndex < 0){
+                anotherIndex = this.data.length - 1;
+            } else if (anotherIndex > this.data.length - 1){
+                anotherIndex = 0;
+            }
+            this.chosenIndex = anotherIndex;
+            this.viewer.view(this.data[anotherIndex]);
         });
     }
 }

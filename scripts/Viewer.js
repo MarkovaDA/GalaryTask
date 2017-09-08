@@ -2,7 +2,6 @@ class Viewer extends EventEmitter{
     constructor(){
         super();
 
-        this.lastIndex = null;
         this.lastItem = null;
         this.root = null;
 
@@ -39,8 +38,6 @@ class Viewer extends EventEmitter{
             media = new Video(data.url);
         }
 
-        this.lastIndex = data.index;
-
         this.lastItem = media;
 
         this.root.find('.explore-zone').empty().append(media.root);
@@ -49,11 +46,11 @@ class Viewer extends EventEmitter{
     }
     //запрашиваем следующий элемент для отображения
     next(){
-		this.emit('VIEW_ANOTHER', this.lastIndex + 1);
+		this.emit('VIEW_ANOTHER', 1);
     }
     //запрашиваем предыдущий элемент для отображения
     prev(){
-		this.emit('VIEW_ANOTHER', this.lastIndex - 1);
+		this.emit('VIEW_ANOTHER', -1);
     }
 
     bindDOMEvents(){

@@ -11,12 +11,15 @@ class Image extends MediaObject {
         this.root = $(`
             <img src=${this.url}>
         `);
+
         return this.root;
     }
 
     /*стратегия анимации элемента*/
     animate(){
         this.root.width('30%');
-        this.root.animate({'width':'50%'},300);
+        this.root.animate({
+            'width':'50%'
+        },300);
     }
 }

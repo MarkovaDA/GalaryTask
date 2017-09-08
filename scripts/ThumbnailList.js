@@ -3,21 +3,28 @@
 * Лента прокрутки элементов
 */
 
-/*const  WIDTH = 120;*/
-
 class ThumbnailList extends EventEmitter{
-    constructor(){
+    constructor(data){
         super();
 
-        this.thumbnails = [];
+        this.data = data;
+        this.items = [];
         this.currentIndex = 0;//номер текущего thumbnail
-        this.prevIndex = 0; //номер предыдущего отображаемого thumbnail
         this.width = 120;
         this.root = null;
 
         this.initDOM();
+        this.loadItems();
         this.bindDOMEvents();
     }
+
+    loadItems(){
+        $.each(this.data, (index, item) => {
+            item.index = index;
+            this.add(item);
+        });
+    }
+
     initDOM(){
         this.root = $(`
             <div class="collection">
@@ -35,26 +42,23 @@ class ThumbnailList extends EventEmitter{
             this.onClickThumbnail(index);
         });
 
-        this.thumbnails.push(thumbnail);
+        this.items.push(thumbnail);
 
         this.root.append(thumbnail.root);
 
-        thumbnail.leftOffset(this.count() * this.width);
+        thumbnail.leftOffset(this.items.length * this.width);
     }
+
     onClickThumbnail(index){
-        this.prevIndex = this.currentIndex;
-        this.currentIndex = index;
-
-        this.selectChosen();
-
-        this.emit('CHOOSE_THUMBNAIL', index);
+        this.setNewIndex(index);
     }
+
     /*прокрутка вправо*/
     next(){
         const w = this.width;
-        const length = this.count();
+        const length = this.items.length;
         //расчет смещений для прокрутки
-        this.thumbnails.forEach(function (elem) {
+        this.items.forEach(function (elem) {
             let value;
             const maxRightOffset = elem.rightOffset();
 
@@ -68,19 +72,13 @@ class ThumbnailList extends EventEmitter{
             elem.leftOffset(value);
         });
 
-        this.prevIndex = this.currentIndex;
-
         //обновление номера текущего слайда
         let newIndex = this.currentIndex + 1;
 
         if (newIndex >= length) {
             newIndex = 0;
         }
-        this.currentIndex = newIndex;
-
-        this.selectChosen();
-
-        this.emit('CHOOSE_THUMBNAIL', newIndex);
+        this.setNewIndex(newIndex);
     }
 
     /*прокрутка влево*/
@@ -89,49 +87,39 @@ class ThumbnailList extends EventEmitter{
         const totalWidth = parseFloat(this.root.width()); /*ширина всей конвейерной ленты*/
 
         //расчет смещений  для элементов ленты
-        this.thumbnails.forEach(function (elem) {
+        this.items.forEach(function (elem) {
            let value;
             const maxLeftOffset = elem.leftOffset();
+
             if (maxLeftOffset === 0 || maxLeftOffset < 0) {
                 value = totalWidth - w;
             } else {
                 value = maxLeftOffset - w;
             }
+
             elem.leftOffset(value);
         });
-        this.prevIndex = this.currentIndex;
         //обновление номера текущего слайда
         let newIndex = this.currentIndex - 1;
+
         if (newIndex < 0) {
-            newIndex = this.count() - 1;
+            newIndex = this.items.length - 1;
         }
-        this.currentIndex = newIndex;
+        this.setNewIndex(newIndex);
+    }
 
+    setNewIndex(newIndex){
+        this.currentIndex = newIndex; //снятие выделения со всех элементов
         this.selectChosen();
-
         this.emit('CHOOSE_THUMBNAIL', newIndex);
-    }
-    get(index){
-        let newIndex;
-
-        if (index == this.count()){
-            newIndex = 0;
-        } else if (index < 0){
-            newIndex = this.count() - 1;
-        } else {
-            newIndex = index;
-        }
-        return this.thumbnails[newIndex];
-    }
-
-    /*кол-во слайдов в галерее*/
-    count(){
-        return this.thumbnails.length;
     }
 
     selectChosen(){
-        this.thumbnails[this.currentIndex].addSelection();//подсветка выбранного элемента
-        this.thumbnails[this.prevIndex].removeSelection();//снятие выделения с предыдущего элемента
+        this.items.forEach((item) => {
+            item.removeSelection();
+        });
+
+        this.items[this.currentIndex].addSelection();//подсветка выбранного элемента
     }
 
     bindDOMEvents(){
